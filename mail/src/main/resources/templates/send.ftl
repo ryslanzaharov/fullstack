@@ -10,15 +10,16 @@
 	<meta name="description" content="" />
 	<script src="https://code.jquery.com/jquery-1.10.2.js"
 			type="text/javascript"></script>
+	<script src="js/validate.js"></script>
 </head>
 
 <body>
 
 		<form th:action="@{/send}" method="post" >
-			<div><label> From : <input type="text" name="from"/> </label></div>
-			<div><label> Subject : <input type="text" name="subject"/> </label></div>
-			<div><label> Body : <input type="text" name="body"/> </label></div>
-			<input type="submit" value="Send">
+			<div><label> From : <input type="text" id="to"/> </label></div>
+			<div><label> Subject : <input type="text" id="subject"/> </label></div>
+			<div><label> Body : <input type="text" id="body"/> </label></div>
+			<input type="button" onclick="sendMessage()" value="Send">
 		</form>
 </body>
 <html/>

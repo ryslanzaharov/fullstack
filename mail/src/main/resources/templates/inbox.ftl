@@ -10,13 +10,14 @@
 	<meta name="description" content="" />
 	<script src="https://code.jquery.com/jquery-1.10.2.js"
 			type="text/javascript"></script>
+
 </head>
 
 <body>
 <form th:action="@{/inbox}" method="post" >
-	<div><label> From : <input type="text" name="userName"/> </label></div>
-	<div><label> Subject : <input type="text" name="password"/> </label></div>
-	<input type="submit" value="Send">
+	<div><label> Login : <input type="text" name="userName"/> </label></div>
+	<div><label> Password : <input type="text" name="password"/> </label></div>
+	<input type="submit" onclick="addContact()" value="Send">
 </form>
 </body>
 <html/>

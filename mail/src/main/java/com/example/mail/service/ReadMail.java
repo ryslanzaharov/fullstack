@@ -1,4 +1,4 @@
-package com.example.mail.controllers;
+package com.example.mail.service;
 
 import com.example.mail.domain.Notification;
 import com.example.mail.domain.UserData;
@@ -15,35 +15,40 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.servlet.http.HttpServletResponse;
 
-@Controller
 public class ReadMail {
 
-    @RequestMapping(value = "/inbox", method = RequestMethod.GET)
-    public String getPageInbox() {
-        return "inbox";
+    private final String host;
+    private final String user;
+    private final String password;
+
+    public ReadMail(String host, String user, String password) {
+        this.host = host;
+        this.user = user;
+        this.password = password;
     }
 
-    @RequestMapping(value = "/inbox", method = RequestMethod.POST)
-    public void receiveMessages(@ModelAttribute UserData user, HttpServletResponse response) {
+    public List<Notification> receive() {
+        final var msgs = new ArrayList<Notification>();
         try {
-            List<Notification> messages = new ArrayList<>();
             Properties properties = new Properties();
-            properties.put("mail.pop3.host", user.getHost());
+            properties.put("mail.pop3.host", this.host);
             properties.put("mail.pop3.port", "995");
             properties.put("mail.pop3.starttls.enable", "true");
             Session emailSession = Session.getDefaultInstance(properties);
             Store store = emailSession.getStore("pop3s");
-            store.connect(user.getHost(), user.getUserName(), user.getPassword());
+            store.connect(this.host, this.user, this.password);
             Folder inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_ONLY);
             for (var msg : inbox.getMessages()) {
-                response.getWriter().print(String.format("%s %s %s", msg.getFrom()[0].toString(), msg.getSubject(), msg.getContent().toString()));
+                msgs.add(new Notification(null, msg.getFrom()[0].toString(), msg.getSubject(), msg.getContent().toString()));
             }
             inbox.close(false);
             store.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return msgs;
     }
+
 
 }

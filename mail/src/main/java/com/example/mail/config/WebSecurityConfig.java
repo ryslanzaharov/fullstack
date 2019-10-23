@@ -20,29 +20,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("notification.job4j@gmail.com").password("nuTKrcW8").roles("USER");
-    }
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("user").password("password").roles("USER");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
-                .antMatchers( "/send", "/inbox").hasRole("USER")
-                .anyRequest().authenticated()
-                   .and()
-                .formLogin()
-                .defaultSuccessUrl("/send", true)
-                .permitAll()
-                .and()
-                .logout()
-                .and()
-                .httpBasic()
-                .and()
+//                .authorizeRequests()
+//                .antMatchers( "/index").permitAll()
+//                .anyRequest().authenticated()
+//                   .and()
+//                .formLogin()
+//                .defaultSuccessUrl("/index", true)
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .and()
+//                .httpBasic()
+//                .and()
                 .csrf().disable();
     }
 

@@ -2,6 +2,8 @@ package com.example.mail.domain;
 
 public class Notification {
 
+//    {"to":1111,"from":2222,"subject":3333,"body":444}
+
     private String to;
     private String from;
     private String subject;
