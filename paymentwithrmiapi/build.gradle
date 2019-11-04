@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.2.0.RELEASE'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.0.RELEASE'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.0.Final'
+}
+
+task rmiregistry(type:Exec) {
+    commandLine 'rmiregistry', '-J-Djava.class.path=build/libs/paymentwithrmiapi-1.0.jar'
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
