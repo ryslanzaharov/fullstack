@@ -1,0 +1,24 @@
+import org.gradle.api.tasks.Exec
+
+plugins {
+    id 'java'
+}
+
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+task rmiregistry(type: Exec) {
+    commandLine 'rmiregistry', '-J-Djava.class.path=build/libs/mailrmi-1.0.jar'
+    standardOutput = new ByteArrayOutputStream()
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
