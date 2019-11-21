@@ -1,0 +1,48 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+group = 'com.auth'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-context-support', version: '3.2.2.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.postgresql:postgresql'
+//    testCompile group: 'org.springframework.boot', name: 'spring-boot-test', version: '1.4.0.RELEASE'
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.2.0')
+    testCompile('org.junit.jupiter:junit-jupiter-params:5.2.0')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0')
+    testCompile "org.mockito:mockito-core:2.+"
+    testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}
