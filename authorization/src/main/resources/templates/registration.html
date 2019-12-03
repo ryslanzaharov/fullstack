@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"
+            type="text/javascript"></script>
+    <script src="js/registration.js"></script>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<div th:text="${account}"></div>
+<form th:action="@{/registration}" method="post">
+    <div><label> Username : <input type="text" id="username"/> </label></div>
+    <div><label> Password : <input type="password" id="password"/> </label></div>
+
+    <div><input type="button" onclick="openAcc()" value="Registration"/></div>
+</form>
+<form th:action="@{/login}" method="get">
+    <div><input type="submit" value="Back"/></div>
+</form>
+</body>
+</html>

@@ -2,8 +2,8 @@ package com.auth.authorization.controller;
 
 
 import com.auth.authorization.AuthorizationApplication;
-import com.auth.authorization.domain.Person;
-import com.auth.authorization.repository.PersonRepository;
+import com.auth.authorization.domain.User;
+import com.auth.authorization.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +43,12 @@ public class PersonControllerTest {
 
     private HttpMessageConverter mappingJackson2HttpMessageConverter;
 
-    private Person person;
+    private User person;
 
-    private List<Person> personList = new ArrayList<>();
+    private List<User> personList = new ArrayList<>();
 
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository personRepository;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -70,7 +70,7 @@ public class PersonControllerTest {
 
         this.personRepository.deleteAllInBatch();
 
-        this.person = personRepository.save(new Person(userName, "password"));
+        this.person = personRepository.save(new User(userName, "password"));
 
         personList.add(person);
 
@@ -79,7 +79,7 @@ public class PersonControllerTest {
     @Test
     public void userNotFound() throws Exception {
         mockMvc.perform(get("/23")
-                .content(this.json(new Person()))
+                .content(this.json(new User()))
                 .contentType(contentType))
                 .andExpect(status().isNotFound());
     }
@@ -97,7 +97,7 @@ public class PersonControllerTest {
 
     @Test
     public void createPerson() throws Exception {
-        String personJson = json(new Person(
+        String personJson = json(new User(
                 "user", "password"));
         this.mockMvc.perform(post("/person/" )
                 .contentType(contentType)

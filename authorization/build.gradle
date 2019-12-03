@@ -20,6 +20,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version: '1.1.7.RELEASE'
     compile group: 'org.springframework', name: 'spring-context-support', version: '3.2.2.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -27,9 +29,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'org.postgresql:postgresql'
-//    testCompile group: 'org.springframework.boot', name: 'spring-boot-test', version: '1.4.0.RELEASE'
-//    testCompile group: 'junit', name: 'junit', version: '4.12'
-
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '5.2.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.2.0.RELEASE'
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.29'
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.2.0')
     testCompile('org.junit.jupiter:junit-jupiter-params:5.2.0')
     testRuntime('org.junit.jupiter:junit-jupiter-engine:5.2.0')
